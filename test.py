@@ -7,3 +7,5 @@ print('chalti kya?')
 with open("D:\\pyworks\\Tweeter\\twitcreds.json",'r') as f:
     a = json.load(f)
 print(a,type(a))
+g = input("your name whore\n")
+print(g)

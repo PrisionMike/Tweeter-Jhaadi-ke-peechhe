@@ -16,4 +16,5 @@ auth.set_access_token(abhikey, abhisec)
 
 api = tweepy.API(auth)
 
-api.update_status(status="What am I doing here?")
+statusstr = input("What's on your mind?\n")
+api.update_status(status=statusstr)
