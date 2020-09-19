@@ -16,7 +16,4 @@ auth.set_access_token(abhikey, abhisec)
 
 api = tweepy.API(auth)
 
-api.update_status(status="Am I doing this the right way? \
-    \nFrom the right place?")
-
-# print(key,seckey,type(key),type(seckey))
+api.update_status(status="What am I doing here?")
