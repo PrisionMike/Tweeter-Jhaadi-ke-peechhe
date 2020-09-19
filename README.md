@@ -1,0 +1,1 @@
+A simple pop-up / CLI / keyboard shortcut based application to tweet your rant out w/o being distracted by the TL feed.
