@@ -1,5 +1,6 @@
 import sys
-from PyQt5.QtWidgets import QApplication as qap, QWidget as qw, QPushButton as qpb 
+from PyQt5.QtWidgets import QApplication as qap, QWidget as qw, QPushButton as qpb, \
+    QDesktopWidget as qdw 
 from PyQt5.QtGui import QIcon as qico 
 
 # print("sys.argv returns:\n",sys.argv)
@@ -20,10 +21,18 @@ class typwidge(qw):
         qbtn.resize(qbtn.sizeHint())
         qbtn.move(200,100)
 
-        self.setGeometry(300,300,350,250)
+        # self.setGeometry(300,300,350,250)
         self.setWindowTitle('Humaari Krishna')
-        self.setWindowIcon(qico('.\\appico.png'))
+        # self.setWindowIcon(qico('.\\appico.png'))
+        self.resize(400,300)
+        self.center()
         self.show()
+
+    def center(self):
+        qr = self.frameGeometry()
+        cp = qdw().availableGeometry().center()
+        qr.moveCenter(cp)
+        self.move(qr.topLeft())
 
 
 app = qap(sys.argv)
