@@ -19,6 +19,7 @@ class Tweewin(QtWidgets.QWidget):
         tweetbtn = QtWidgets.QPushButton('Tweet',self)
         tweetbtn.resize(tweetbtn.sizeHint())
         tweetbtn.move(self.buttonleveloff,self.siztup[1] - self.buttonleveloff)
+        tweetbtn.setShortcut("Ctrl+Return")
         tweetbtn.clicked.connect(self.tweetit)
 
         cancelbtn = QtWidgets.QPushButton('Cancel', self)
