@@ -3,10 +3,11 @@
 import sys
 import tweepy
 import json
-from PyQt5.QtWidgets import QApplication as widapp
 
 sys.path.append('.')
 from test_textinput import Tweewin
+from PyQt5.QtWidgets import QApplication as widapp
+
 
 app = widapp(sys.argv)
 tweewin = Tweewin()
@@ -33,3 +34,5 @@ if tweewin.shouldtweet:
     # api.update_status(status=statusstr)
 
     api.update_status(status = thetweet)
+else:
+    print("You didn't wanna tweet.")

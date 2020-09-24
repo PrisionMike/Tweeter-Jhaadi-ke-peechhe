@@ -16,7 +16,7 @@ class Tweewin(QtWidgets.QWidget):
         tweetbtn = QtWidgets.QPushButton('Tweet',self)
         tweetbtn.resize(tweetbtn.sizeHint())
         tweetbtn.move(100,100)
-        tweetbtn.clicked.connect(self.showit)
+        tweetbtn.clicked.connect(self.tweetit)
 
         cancelbtn = QtWidgets.QPushButton('Cancel', self)
         cancelbtn.move(200,100)
@@ -34,7 +34,7 @@ class Tweewin(QtWidgets.QWidget):
     
     def tweetit(self):
         self.tweettext = self.txtbox.text()
-        if self.tweettext != ""
+        if self.tweettext != "":
             self.shouldtweet = True
         # print('the received tweet is',self.tweettext)
         # QtWidgets.QApplication.instance().quit
@@ -47,10 +47,10 @@ class Tweewin(QtWidgets.QWidget):
         qr.moveCenter(cp)
         self.move(qr.topLeft())
 
-app = QtWidgets.QApplication(sys.argv)
-twiwin = Tweewin()
-# sys.exit(app.exec_())
-app.exec_()
-print('you maybe loooking for this:',twiwin.tweettext)
+# app = QtWidgets.QApplication(sys.argv)
+# twiwin = Tweewin()
+# # sys.exit(app.exec_())
+# app.exec_()
+# print('you maybe loooking for this:',twiwin.tweettext)
 
 # print(twiwin.tweettxt,twiwin.status)
