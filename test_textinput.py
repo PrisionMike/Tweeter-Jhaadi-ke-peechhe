@@ -4,6 +4,7 @@ import sys
 class Tweewin(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
+        self.shouldtweet = False
         self.winsetup()
 
     def winsetup(self):
@@ -31,12 +32,14 @@ class Tweewin(QtWidgets.QWidget):
         # self.tweettxt,self.status = QtWidgets.QInputDialog.getText(self,'input dialog','haal kaisa hai janab ka?')
         self.show()
     
-    def showit(self):
+    def tweetit(self):
         self.tweettext = self.txtbox.text()
+        if self.tweettext != ""
+            self.shouldtweet = True
         # print('the received tweet is',self.tweettext)
         # QtWidgets.QApplication.instance().quit
         self.close()
-        return self.tweettext
+        # return self.tweettext
 
     def center(self):
         qr = self.frameGeometry()

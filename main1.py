@@ -1,20 +1,35 @@
 # should be the main file
 
+import sys
 import tweepy
 import json
+from PyQt5.QtWidgets import QApplication as widapp
 
-with open("E:\\nijitwitdetails.json") as f:
-    creds = json.load(f)
+sys.path.append('.')
+from test_textinput import Tweewin
 
-conkey = creds["grahak chabhi"]
-consec = creds["gupt grahak chabhi"]
-abhikey = creds["abhigam tabiz"]
-abhisec = creds["khufiya abhigam tabiz"]
+app = widapp(sys.argv)
+tweewin = Tweewin()
+app.exec_()
 
-auth = tweepy.OAuthHandler(conkey, consec)
-auth.set_access_token(abhikey, abhisec)
+if tweewin.shouldtweet:
 
-api = tweepy.API(auth)
+    thetweet = tweewin.tweettext
 
-statusstr = input("What's on your mind?\n")
-api.update_status(status=statusstr)
+    with open("E:\\nijitwitdetails.json") as f:
+        creds = json.load(f)
+
+    conkey = creds["grahak chabhi"]
+    consec = creds["gupt grahak chabhi"]
+    abhikey = creds["abhigam tabiz"]
+    abhisec = creds["khufiya abhigam tabiz"]
+
+    auth = tweepy.OAuthHandler(conkey, consec)
+    auth.set_access_token(abhikey, abhisec)
+
+    api = tweepy.API(auth)
+
+    # statusstr = input("What's on your mind?\n")
+    # api.update_status(status=statusstr)
+
+    api.update_status(status = thetweet)
