@@ -15,19 +15,21 @@ class Tweewin(QtWidgets.QWidget):
 
         tweetbtn = QtWidgets.QPushButton('Tweet',self)
         tweetbtn.resize(tweetbtn.sizeHint())
-        tweetbtn.move(100,100)
+        tweetbtn.move(50,200)
         tweetbtn.clicked.connect(self.tweetit)
 
         cancelbtn = QtWidgets.QPushButton('Cancel', self)
-        cancelbtn.move(200,100)
+        cancelbtn.move(200,200)
         # cancelbtn.clicked.connect(QtWidgets.QApplication.instance().quit)
         cancelbtn.clicked.connect(self.close)
         cancelbtn.resize(cancelbtn.sizeHint())
 
         self.tweettext = ""
         self.txtbox = QtWidgets.QLineEdit(self)
-        self.txtbox.move(50,50)
-        self.txtbox.resize(280,40)
+        self.txtbox.returnPressed.connect(self.tweetit)
+        self.txtbox.setFocus()
+        self.txtbox.move(10,10)
+        self.txtbox.resize(350,100)
 
         # self.tweettxt,self.status = QtWidgets.QInputDialog.getText(self,'input dialog','haal kaisa hai janab ka?')
         self.show()
@@ -47,6 +49,8 @@ class Tweewin(QtWidgets.QWidget):
         qr.moveCenter(cp)
         self.move(qr.topLeft())
 
+
+# Comment this section before importing data
 # app = QtWidgets.QApplication(sys.argv)
 # twiwin = Tweewin()
 # # sys.exit(app.exec_())
