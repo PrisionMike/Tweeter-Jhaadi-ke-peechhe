@@ -37,7 +37,7 @@ class Tweewin(QtWidgets.QWidget):
         self.txtbox.move(10,10)
         self.txtbox.resize(self.siztup[0]-20,self.siztup[1]/2)
 
-        # self.tweettxt,self.status = QtWidgets.QInputDialog.getText(self,'input dialog','haal kaisa hai janab ka?')
+        # <<< === HERE'S THE SELF SHOW!!! === >>>
         self.show()
     
     def tweetit(self):
@@ -47,6 +47,7 @@ class Tweewin(QtWidgets.QWidget):
         # print('the received tweet is',self.tweettext)
         # QtWidgets.QApplication.instance().quit
         self.close()
+        # self.txtbox.clear()
         # return self.tweettext
 
     def center(self):
@@ -57,10 +58,10 @@ class Tweewin(QtWidgets.QWidget):
 
 
 # Comment this section before importing data
-# app = QtWidgets.QApplication(sys.argv)
-# twiwin = Tweewin()
-# # sys.exit(app.exec_())
-# app.exec_()
-# print('you maybe loooking for this:',twiwin.tweettext)
+if __name__ == "__main__":
+    app = QtWidgets.QApplication(sys.argv)
+    twiwin = Tweewin()
+    app.exec_()
+    print('you maybe loooking for this:',twiwin.tweettext)
 
 # print(twiwin.tweettxt,twiwin.status)
