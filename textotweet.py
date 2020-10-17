@@ -3,7 +3,6 @@ import json
 from dotenv import load_dotenv
 import os
 
-load_dotenv()
 
 thetweet = "This tweet has been made by obtaining the keys \
             from the environment variable as opposed to the \
@@ -21,22 +20,29 @@ print(thetweet)
 # abhikey = creds["abhigam tabiz"]
 # abhisec = creds["khufiya abhigam tabiz"]
 
-conkey = os.getenv("TWITTER_USER_KEY")
-consec = os.getenv("TWITTER_SECRET_USER_KEY")
-abhikey = os.getenv("TWITTER_ACCESS_TOKEN")
-abhisec = os.getenv("TWITTER_SECRET_ACCESS_TOKEN")
+def tweetthetext(thetext):
 
-print("Tweet creds:\n",conkey)
-print(consec)
-print(abhikey)
-print(abhisec)
+    load_dotenv()
 
-auth = tweepy.OAuthHandler(conkey, consec)
-auth.set_access_token(abhikey, abhisec)
+    conkey = os.getenv("TWITTER_USER_KEY")
+    consec = os.getenv("TWITTER_SECRET_USER_KEY")
+    abhikey = os.getenv("TWITTER_ACCESS_TOKEN")
+    abhisec = os.getenv("TWITTER_SECRET_ACCESS_TOKEN")
 
-api = tweepy.API(auth)
+    # print("Tweet creds:\n",conkey)
+    # print(consec)
+    # print(abhikey)
+    # print(abhisec)
 
-# statusstr = input("What's on your mind?\n")
-# api.update_status(status=statusstr)
+    auth = tweepy.OAuthHandler(conkey, consec)
+    auth.set_access_token(abhikey, abhisec)
 
-api.update_status(status = thetweet)
+    api = tweepy.API(auth)
+
+    # statusstr = input("What's on your mind?\n")
+    # api.update_status(status=statusstr)
+
+    api.update_status(status = thetext)
+
+if __name__ == "__main__":
+    tweetthetext(thetweet)
