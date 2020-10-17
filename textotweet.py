@@ -8,7 +8,7 @@ thetweet = "This tweet has been made by obtaining the keys \
             from the environment variable as opposed to the \
             local json file used earlier"
 # thetweet = "Let's roll it baby"
-print(thetweet)
+
 
 # with open("E:\\nijitwitdetails.json") as f:
     # creds = json.load(f)
@@ -46,3 +46,5 @@ def tweetthetext(thetext):
 
 if __name__ == "__main__":
     tweetthetext(thetweet)
+    thetweet = input('Why are you here?\n')
+    print(thetweet)

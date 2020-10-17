@@ -18,16 +18,17 @@ class Mainwin(QtWidgets.QWidget):
         self.textfont = QtGui.QFont("Times",14)
 
         self.tweetbtn = QtWidgets.QPushButton('Tweet',self)
-        self.tweetbtn.resize(self.tweetbtn.sizeHint())
         self.tweetbtn.move(self.buttonleveloff,self.siztup[1] - self.buttonleveloff)
         self.tweetbtn.setShortcut("Ctrl+Return")
         self.tweetbtn.clicked.connect(self.tweetit)
+        self.tweetbtn.setFont(self.textfont)
+        self.tweetbtn.resize(2*self.tweetbtn.sizeHint())
 
-        cancelbtn = QtWidgets.QPushButton('Cancel', self)
-        cancelbtn.move(4*self.buttonleveloff,self.siztup[1] - self.buttonleveloff)
-        # cancelbtn.clicked.connect(QtWidgets.QApplication.instance().quit)
-        cancelbtn.clicked.connect(self.close)
-        cancelbtn.resize(cancelbtn.sizeHint())
+        self.cancelbtn = QtWidgets.QPushButton('Cancel', self)
+        self.cancelbtn.move(4*self.buttonleveloff,self.siztup[1] - self.buttonleveloff)
+        self.cancelbtn.clicked.connect(self.close)
+        self.cancelbtn.setFont(self.textfont)
+        self.cancelbtn.resize(2*self.cancelbtn.sizeHint())
 
         self.tweettext = ""
 
@@ -35,14 +36,14 @@ class Mainwin(QtWidgets.QWidget):
         self.txtbox.setFont(self.textfont)
         self.txtbox.setFocus()
         self.txtbox.move(10,10)
-        self.txtbox.resize(self.siztup[0]-20,self.siztup[1]/2)
+        self.txtbox.resize(self.siztup[0]-20,int(self.siztup[1]/2))
 
         # <<< === HERE'S THE SELF SHOW!!! === >>>
         # self.show()
     
     def tweetit(self):
         self.tweettext = self.txtbox.toPlainText()
-        if self.tweettext != "":
+        if self.tweettext == "":
             self.shouldtweet = True
             self.warnemptiness()
         else:
@@ -60,10 +61,11 @@ class Mainwin(QtWidgets.QWidget):
         pass
 
 
-# Comment this section before importing data
+
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     twiwin = Mainwin()
+    twiwin.show()
     app.exec_()
     print('you maybe loooking for this:',twiwin.tweettext)
 
