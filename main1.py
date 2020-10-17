@@ -8,7 +8,6 @@ sys.path.append('.')
 from test_textinput import Tweewin
 from PyQt5.QtWidgets import QApplication as widapp
 
-
 app = widapp(sys.argv)
 tweewin = Tweewin()
 app.exec_()
