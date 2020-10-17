@@ -1,4 +1,5 @@
 from PyQt5 import QtCore,QtGui,QtWidgets
+from PyQt5.QtCore import Qt
 import sys
 from textotweet import tweetthetext
 
@@ -15,19 +16,22 @@ class Mainwin(QtWidgets.QWidget):
         self.setWindowTitle("Tweeter pop-up")
         self.resize(self.siztup[0],self.siztup[1])
         self.center()
+
         self.textfont = QtGui.QFont("Times",14)
+        self.btnfont = QtGui.QFont("Arial",12)
+        self.alertfont = QtGui.QFont("Times",12)
 
         self.tweetbtn = QtWidgets.QPushButton('Tweet',self)
         self.tweetbtn.move(self.buttonleveloff,self.siztup[1] - self.buttonleveloff)
         self.tweetbtn.setShortcut("Ctrl+Return")
         self.tweetbtn.clicked.connect(self.tweetit)
-        self.tweetbtn.setFont(self.textfont)
+        self.tweetbtn.setFont(self.btnfont)
         self.tweetbtn.resize(2*self.tweetbtn.sizeHint())
 
         self.cancelbtn = QtWidgets.QPushButton('Cancel', self)
         self.cancelbtn.move(4*self.buttonleveloff,self.siztup[1] - self.buttonleveloff)
         self.cancelbtn.clicked.connect(self.close)
-        self.cancelbtn.setFont(self.textfont)
+        self.cancelbtn.setFont(self.btnfont)
         self.cancelbtn.resize(2*self.cancelbtn.sizeHint())
 
         self.tweettext = ""
@@ -37,6 +41,19 @@ class Mainwin(QtWidgets.QWidget):
         self.txtbox.setFocus()
         self.txtbox.move(10,10)
         self.txtbox.resize(self.siztup[0]-20,int(self.siztup[1]/2))
+
+        self.alertbox = QtWidgets.QLabel("XXXXXXXXXXXXXXXXXXXXXX")
+        fontalert = self.alertbox.font()
+        fontalert.setPointSize(30)
+        self.alertbox.setFont(fontalert)
+        # self.alertbox.setFont(self.alertfont)
+        # self.alertbox.setText("Any wellcome here?")
+        # self.alertbox.setStyleSheet("color:yellow")
+        self.alertbox.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+        # self.alertbox.move(400,250)
+        # self.alertbox.setGeometry(10,400,300,100)
+        # self.alertbox.show()
+
 
         # <<< === HERE'S THE SELF SHOW!!! === >>>
         # self.show()
