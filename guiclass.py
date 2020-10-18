@@ -42,21 +42,16 @@ class Mainwin(QtWidgets.QWidget):
         self.txtbox.move(10,10)
         self.txtbox.resize(self.siztup[0]-20,int(self.siztup[1]/2))
 
-        self.alertbox = QtWidgets.QLabel("XXXXXXXXXXXXXXXXXXXXXX")
+        self.alertbox = QtWidgets.QLabel("XXXXXXXXXXXXXXXXXXXXXX",self)
         fontalert = self.alertbox.font()
-        fontalert.setPointSize(30)
+        fontalert.setPointSize(14)
         self.alertbox.setFont(fontalert)
         # self.alertbox.setFont(self.alertfont)
-        # self.alertbox.setText("Any wellcome here?")
-        # self.alertbox.setStyleSheet("color:yellow")
-        self.alertbox.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
-        # self.alertbox.move(400,250)
+        self.alertbox.setText("Any wellcome here?")
+        self.alertbox.setStyleSheet("color:Orange")
+        # self.alertbox.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+        self.alertbox.move(300,300)
         # self.alertbox.setGeometry(10,400,300,100)
-        # self.alertbox.show()
-
-
-        # <<< === HERE'S THE SELF SHOW!!! === >>>
-        # self.show()
     
     def tweetit(self):
         self.tweettext = self.txtbox.toPlainText()
@@ -65,6 +60,8 @@ class Mainwin(QtWidgets.QWidget):
             self.warnemptiness()
         else:
             tweetthetext(self.tweettext)
+            self.alertbox.setText("Tweet Sent!")
+            self.alertbox.setStyleSheet("color:Blue")
             self.txtbox.clear()
 
 
