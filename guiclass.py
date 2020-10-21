@@ -1,4 +1,6 @@
 from PyQt5 import QtCore,QtGui,QtWidgets
+from PyQt5.QtWidgets import QMainWindow, QLabel, QApplication, QPushButton, QWidget, \
+                            QVBoxLayout,QHBoxLayout
 from PyQt5.QtCore import Qt
 import sys
 from textotweet import tweetthetext
@@ -75,12 +77,61 @@ class Mainwin(QtWidgets.QWidget):
         pass
 
 
+# New Class preferred class.
+class Newmainwin(QMainWindow):
+    def __init__(self):
+        super().__init__()
+
+        self.setWindowTitle('Rab Raakha')
+        self.resize(750,420)
+
+        textfont = QtGui.QFont("Arial",14)
+        btnfont = QtGui.QFont("OldEnglish",12)
+        alertfont = QtGui.QFont("Times",12)
+        headerfont = QtGui.QFont("Serif",10)
+        
+        mainlayout = QVBoxLayout()
+
+        self.charcount = QLabel("Char Limit:240")
+        self.charcount.setFont(headerfont)
+        self.charcount.setAlignment(Qt.AlignRight)
+
+        mainlayout.addWidget(self.charcount)
+
+        self.txtbox = QtWidgets.QPlainTextEdit(self)
+        self.txtbox.setFont(textfont)
+        self.txtbox.setFocus()
+        self.txtbox.setAutoFillBackground(True)
+        self.txtbox.textChanged.connect(self.typing)
+
+        mainlayout.addWidget(self.txtbox)
+
+        self.tweetbtn = QtWidgets.QPushButton('Tweet',self)
+        self.tweetbtn.setShortcut("Ctrl+Return")
+        # self.tweetbtn.clicked.connect(self.tweetit)
+        self.tweetbtn.setFont(btnfont)
+        self.tweetbtn.resize(2*self.tweetbtn.sizeHint())
+
+        mainlayout.addWidget(self.tweetbtn)
+
+        self.cancelbtn = QtWidgets.QPushButton('Clear', self)
+        self.cancelbtn.clicked.connect(self.txtbox.clear)
+        self.cancelbtn.setFont(btnfont)
+        self.cancelbtn.resize(2*self.cancelbtn.sizeHint())
+
+        mainlayout.addWidget(self.cancelbtn)
+
+        widget = QWidget()
+        widget.setLayout(mainlayout)
+        self.setCentralWidget(widget)
+    def typing(self):
+        
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     twiwin = Mainwin()
     twiwin.show()
     app.exec_()
-    print('you maybe loooking for this:',twiwin.tweettext)
+    # print('you maybe loooking for this:',twiwin.tweettext)
 
 # print(twiwin.tweettxt,twiwin.status)
