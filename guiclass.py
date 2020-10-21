@@ -125,11 +125,14 @@ class Newmainwin(QMainWindow):
         widget.setLayout(mainlayout)
         self.setCentralWidget(widget)
     def typing(self):
-        
+        txt = self.txtbox.toPlainText()
+        tcount = len(txt)
+        txtval = str(tcount)+"/240"
+        self.charcount.setText(txtval)
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-    twiwin = Mainwin()
+    twiwin = Newmainwin()
     twiwin.show()
     app.exec_()
     # print('you maybe loooking for this:',twiwin.tweettext)
