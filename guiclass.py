@@ -1,6 +1,6 @@
 from PyQt5 import QtCore,QtGui,QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QLabel, QApplication, QPushButton, QWidget, \
-                            QVBoxLayout,QHBoxLayout
+                            QVBoxLayout,QHBoxLayout,QGridLayout
 from PyQt5.QtCore import Qt
 import sys
 from textotweet import tweetthetext
@@ -91,6 +91,9 @@ class Newmainwin(QMainWindow):
         headerfont = QtGui.QFont("Serif",10)
         
         mainlayout = QVBoxLayout()
+        lowerlayout = QHBoxLayout()
+        lowerleftlayout = QVBoxLayout()
+        btnlayout = QGridLayout()
 
         self.charcount = QLabel("Char Limit:240")
         self.charcount.setFont(headerfont)
@@ -106,20 +109,27 @@ class Newmainwin(QMainWindow):
 
         mainlayout.addWidget(self.txtbox)
 
+        mainlayout.addLayout(lowerlayout)
+        lowerlayout.addLayout(lowerleftlayout)
+        lowerleftlayout.addLayout(btnlayout)
+
         self.tweetbtn = QtWidgets.QPushButton('Tweet',self)
         self.tweetbtn.setShortcut("Ctrl+Return")
         # self.tweetbtn.clicked.connect(self.tweetit)
         self.tweetbtn.setFont(btnfont)
         self.tweetbtn.resize(2*self.tweetbtn.sizeHint())
 
-        mainlayout.addWidget(self.tweetbtn)
+        # mainlayout.addWidget(self.tweetbtn)
 
         self.cancelbtn = QtWidgets.QPushButton('Clear', self)
         self.cancelbtn.clicked.connect(self.txtbox.clear)
         self.cancelbtn.setFont(btnfont)
         self.cancelbtn.resize(2*self.cancelbtn.sizeHint())
 
-        mainlayout.addWidget(self.cancelbtn)
+        # mainlayout.addWidget(self.cancelbtn)
+
+        btnlayout.addWidget(self.tweetbtn,0,0)
+        btnlayout.addWidget(self.cancelbtn,0,2)
 
         widget = QWidget()
         widget.setLayout(mainlayout)
