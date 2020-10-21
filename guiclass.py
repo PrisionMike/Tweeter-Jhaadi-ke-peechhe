@@ -124,10 +124,24 @@ class Newmainwin(QMainWindow):
         widget = QWidget()
         widget.setLayout(mainlayout)
         self.setCentralWidget(widget)
+
     def typing(self):
+        charlim = 100
+        charwarn = 80
         txt = self.txtbox.toPlainText()
         tcount = len(txt)
-        txtval = str(tcount)+"/240"
+        exclaim = ""
+        if tcount < charwarn:
+            self.charcount.setStyleSheet("color:Black")
+
+        if tcount >= charwarn and tcount < charlim:
+            self.charcount.setStyleSheet("color:Orange")
+        if tcount >= charlim:
+            self.charcount.setStyleSheet("color:Red;font:Bold")
+            # self.charcount.setTextFormat()
+            exclaim = "!"
+            
+        txtval = "Char Count:" + str(tcount) + "/" + str(charlim) + exclaim
         self.charcount.setText(txtval)
 
 if __name__ == "__main__":
