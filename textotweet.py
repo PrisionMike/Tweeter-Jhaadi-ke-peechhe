@@ -37,14 +37,38 @@ def tweetthetext(thetext):
     auth = tweepy.OAuthHandler(conkey, consec)
     auth.set_access_token(abhikey, abhisec)
 
+    withauth(auth,thetext)
+
+def ariri(thetweet,uskichoice):
+
+    load_dotenv()
+
+    uskichoice = uskichoice.upper()
+
+    ukapp = "UK_APP_"+uskichoice
+    atapp = "AT_APP_"+uskichoice
+
+    if uskichoice != "PKD" and uskichoice != "GKM":
+        raise TypeError("Ankh dikhata hai!!....")
+    
+    conkey = os.getenv(ukapp)
+    consec = os.getenv("S"+ukapp)
+    autok = os.getenv(atapp)
+    secautok = os.getenv("S"+atapp)
+
+    auth = tweepy.OAuthHandler(conkey,consec)
+    auth.set_access_token(autok,secautok)
+
+    withauth(auth,thetweet)
+        
+def withauth(auth,txt):
     api = tweepy.API(auth)
+    api.update_status(status = txt)
 
-    # statusstr = input("What's on your mind?\n")
-    # api.update_status(status=statusstr)
-
-    api.update_status(status = thetext)
 
 if __name__ == "__main__":
-    tweetthetext(thetweet)
-    thetweet = input('Why are you here?\n')
+    theapp = input("Where'd you wanna go?\n")
+    thetweet = input("How much you wanna risk?\n")
+    # tweetthetext(thetweet)
+    ariri(thetweet,theapp)
     print(thetweet)

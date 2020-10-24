@@ -10,7 +10,7 @@ from PyQt5.QtWidgets import QApplication as widapp
 
 app = widapp(sys.argv)
 tweewin = Tweewin()
-app.exec_()
+app.exec()
 
 if tweewin.shouldtweet:
 
