@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QMainWindow, QLabel, QApplication, QPushButton, QWid
                             QVBoxLayout,QHBoxLayout,QGridLayout
 from PyQt5.QtCore import Qt
 import sys
-from textotweet import tweetthetext
+from textotweet import tweetthetext,ariri
 
 class Mainwin(QtWidgets.QWidget):
     def __init__(self):
@@ -95,7 +95,6 @@ class Newmainwin(QMainWindow):
         self.charlim = 240
         self.charwarn = 220
 
-        
         mainlayout = QVBoxLayout()
         lowerlayout = QHBoxLayout()
         lowerleftlayout = QVBoxLayout()
@@ -137,6 +136,15 @@ class Newmainwin(QMainWindow):
         btnlayout.addWidget(self.tweetbtn,0,0)
         btnlayout.addWidget(self.cancelbtn,0,1)
 
+        self.pkd = QtWidgets.QRadioButton("Paan Ki Dukaan", self)
+        self.gkm = QtWidgets.QRadioButton("Gori Ka Makaan", self)
+        self.pkd.toggled.connect(self.pkdfunk)
+        self.gkm.toggled.connect(self.gkmfunc)
+        self.pkd.setChecked(True)
+
+        lowerleftlayout.addWidget(self.pkd)
+        lowerleftlayout.addWidget(self.gkm)
+
         self.notiflabel = QLabel()
         self.notiflabel.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
         self.notiflabel.setFont(alertfont)
@@ -150,6 +158,14 @@ class Newmainwin(QMainWindow):
 
     # def resetnotif(self):
     #     self.
+
+    def pkdfunk(self,s):
+        if s:
+            self.appname = "PKD"
+
+    def gkmfunc(self,s):
+        if s:
+            self.appname = "GKM"
 
     def typing(self):
         txt = self.txtbox.toPlainText()
@@ -170,6 +186,7 @@ class Newmainwin(QMainWindow):
 
     def cleanup(self):
         self.shouldtweet = False
+        # self.appname = "pkd"
         self.txtbox.clear()
         self.txtbox.setFocus()
         self.notiflabel.setText("Ready to Tweet")
@@ -181,20 +198,18 @@ class Newmainwin(QMainWindow):
             self.shouldtweet = False
             self.warnemptiness()
         else:
-            tweetthetext(self.tweettext)
-            self.notiflabel.setText("Tweet Sent!")
+            # tweetthetext(self.tweettext)
+            ariri(self.tweettext,self.appname)
+            self.notiflabel.setText("Tweet Sent from\n"+self.appname)
             self.notiflabel.setStyleSheet("background-color:rgb(128,195,66)")
             self.txtbox.clear()
             self.txtbox.setFocus()
     
     def warnemptiness(self):
-        self.notiflabel.setStyleSheet("color:Yellow")
+        self.notiflabel.setStyleSheet("background-color:Yellow")
         self.notiflabel.setText("No Text. No Tweet.")
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     twiwin = Newmainwin()
     twiwin.show()
     app.exec_()
-    # print('you maybe loooking for this:',twiwin.tweettext)
-
-# print(twiwin.tweettxt,twiwin.status)
