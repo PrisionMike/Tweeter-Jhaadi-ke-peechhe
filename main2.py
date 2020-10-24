@@ -2,6 +2,8 @@
 
 from textotweet import tweetthetext
 
+pass
+
 # g = input("Ssup loser?\n")
 # tweetthetext(g)
 

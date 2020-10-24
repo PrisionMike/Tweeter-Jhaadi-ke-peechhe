@@ -83,7 +83,7 @@ class Newmainwin(QMainWindow):
         super().__init__()
 
         self.setWindowTitle('Rab Raakha')
-        self.resize(750,420)
+        self.resize(580,270)
 
         textfont = QtGui.QFont("Arial",14)
         btnfont = QtGui.QFont("OldEnglish",12)
@@ -128,7 +128,7 @@ class Newmainwin(QMainWindow):
         # mainlayout.addWidget(self.tweetbtn)
 
         self.cancelbtn = QtWidgets.QPushButton('Clear', self)
-        self.cancelbtn.clicked.connect(self.txtbox.clear)
+        self.cancelbtn.clicked.connect(self.cleanup)
         self.cancelbtn.setFont(btnfont)
         self.cancelbtn.resize(2*self.cancelbtn.sizeHint())
 
@@ -137,17 +137,19 @@ class Newmainwin(QMainWindow):
         btnlayout.addWidget(self.tweetbtn,0,0)
         btnlayout.addWidget(self.cancelbtn,0,1)
 
-        self.notiflabel = QLabel("Ready to Tweet")
-        self.notiflabel.setAlignment(Qt.AlignHCenter)
+        self.notiflabel = QLabel()
+        self.notiflabel.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
         self.notiflabel.setFont(alertfont)
-        # self.notiflabel.setcolo
-        self.notiflabel.setStyleSheet("background-color:blue")
+        self.cleanup()
 
         lowerlayout.addWidget(self.notiflabel)
 
         widget = QWidget()
         widget.setLayout(mainlayout)
         self.setCentralWidget(widget)
+
+    # def resetnotif(self):
+    #     self.
 
     def typing(self):
         txt = self.txtbox.toPlainText()
@@ -166,6 +168,13 @@ class Newmainwin(QMainWindow):
         txtval = "Char Count:" + str(tcount) + "/" + str(self.charlim) + exclaim
         self.charcount.setText(txtval)
 
+    def cleanup(self):
+        self.shouldtweet = False
+        self.txtbox.clear()
+        self.txtbox.setFocus()
+        self.notiflabel.setText("Ready to Tweet")
+        self.notiflabel.setStyleSheet("background-color:rgb(20,170,255)")
+    
     def tweetit(self):
         self.tweettext = self.txtbox.toPlainText()
         if self.tweettext == "":
@@ -174,11 +183,12 @@ class Newmainwin(QMainWindow):
         else:
             tweetthetext(self.tweettext)
             self.notiflabel.setText("Tweet Sent!")
-            # self.alertbox.setStyleSheet("color:Red")
+            self.notiflabel.setStyleSheet("background-color:rgb(128,195,66)")
             self.txtbox.clear()
+            self.txtbox.setFocus()
     
     def warnemptiness(self):
-        self.alertbox.setStyleSheet("color:Red")
+        self.notiflabel.setStyleSheet("color:Yellow")
         self.notiflabel.setText("No Text. No Tweet.")
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
