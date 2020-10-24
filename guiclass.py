@@ -89,13 +89,19 @@ class Newmainwin(QMainWindow):
         btnfont = QtGui.QFont("OldEnglish",12)
         alertfont = QtGui.QFont("Times",12)
         headerfont = QtGui.QFont("Serif",10)
+
+        self.shouldtweet = False        # No apparent use of this flag right now.
+        self.tweettext = ""
+        self.charlim = 240
+        self.charwarn = 220
+
         
         mainlayout = QVBoxLayout()
         lowerlayout = QHBoxLayout()
         lowerleftlayout = QVBoxLayout()
         btnlayout = QGridLayout()
 
-        self.charcount = QLabel("Char Limit:240")
+        self.charcount = QLabel("Char Limit:"+str(self.charlim))
         self.charcount.setFont(headerfont)
         self.charcount.setAlignment(Qt.AlignRight)
 
@@ -115,7 +121,7 @@ class Newmainwin(QMainWindow):
 
         self.tweetbtn = QtWidgets.QPushButton('Tweet',self)
         self.tweetbtn.setShortcut("Ctrl+Return")
-        # self.tweetbtn.clicked.connect(self.tweetit)
+        self.tweetbtn.clicked.connect(self.tweetit)
         self.tweetbtn.setFont(btnfont)
         self.tweetbtn.resize(2*self.tweetbtn.sizeHint())
 
@@ -129,31 +135,51 @@ class Newmainwin(QMainWindow):
         # mainlayout.addWidget(self.cancelbtn)
 
         btnlayout.addWidget(self.tweetbtn,0,0)
-        btnlayout.addWidget(self.cancelbtn,0,2)
+        btnlayout.addWidget(self.cancelbtn,0,1)
+
+        self.notiflabel = QLabel("Ready to Tweet")
+        self.notiflabel.setAlignment(Qt.AlignHCenter)
+        self.notiflabel.setFont(alertfont)
+        # self.notiflabel.setcolo
+        self.notiflabel.setStyleSheet("background-color:blue")
+
+        lowerlayout.addWidget(self.notiflabel)
 
         widget = QWidget()
         widget.setLayout(mainlayout)
         self.setCentralWidget(widget)
 
     def typing(self):
-        charlim = 100
-        charwarn = 80
         txt = self.txtbox.toPlainText()
         tcount = len(txt)
         exclaim = ""
-        if tcount < charwarn:
+        if tcount < self.charwarn:
             self.charcount.setStyleSheet("color:Black")
 
-        if tcount >= charwarn and tcount < charlim:
+        if tcount >= self.charwarn and tcount < self.charlim:
             self.charcount.setStyleSheet("color:Orange")
-        if tcount >= charlim:
+        if tcount >= self.charlim:
             self.charcount.setStyleSheet("color:Red;font:Bold")
             # self.charcount.setTextFormat()
             exclaim = "!"
             
-        txtval = "Char Count:" + str(tcount) + "/" + str(charlim) + exclaim
+        txtval = "Char Count:" + str(tcount) + "/" + str(self.charlim) + exclaim
         self.charcount.setText(txtval)
 
+    def tweetit(self):
+        self.tweettext = self.txtbox.toPlainText()
+        if self.tweettext == "":
+            self.shouldtweet = False
+            self.warnemptiness()
+        else:
+            tweetthetext(self.tweettext)
+            self.notiflabel.setText("Tweet Sent!")
+            # self.alertbox.setStyleSheet("color:Red")
+            self.txtbox.clear()
+    
+    def warnemptiness(self):
+        self.alertbox.setStyleSheet("color:Red")
+        self.notiflabel.setText("No Text. No Tweet.")
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     twiwin = Newmainwin()
