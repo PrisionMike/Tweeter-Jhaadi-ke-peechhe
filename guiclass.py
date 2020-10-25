@@ -225,13 +225,11 @@ class Newmainwin(QMainWindow):
             self.warnemptiness()
         else:
             # tweetthetext(self.tweettext)
-            # ariri(self.tweettext,self.appname)
+            ariri(self.tweettext,self.appname)
             self.notiflabel.setText("Tweet Sent from\n"+self.appname)
             self.notiflabel.setStyleSheet("background-color:rgb(128,195,66)")
             self.txtbox.clear()
             self.txtbox.setFocus()
-            # self.pkd.toggle()
-            # self.gkm.toggle()
             self.appflick()
     
     def appflick(self):
