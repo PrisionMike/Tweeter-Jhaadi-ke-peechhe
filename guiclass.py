@@ -82,7 +82,7 @@ class Newmainwin(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.setWindowTitle('Rab Raakha')
+        # self.setWindowTitle('Rab Raakha')
         self.resize(580,270)
 
         textfont = QtGui.QFont("Arial",14)
@@ -152,20 +152,27 @@ class Newmainwin(QMainWindow):
 
         lowerlayout.addWidget(self.notiflabel)
 
+        self._setWindowtitle()
+
         widget = QWidget()
         widget.setLayout(mainlayout)
         self.setCentralWidget(widget)
 
-    # def resetnotif(self):
-    #     self.
+    def _setWindowtitle(self):
+        if self.appname.upper() == "PKD":
+            self.setWindowTitle("Paan Ki Dukaan")
+        if self.appname.upper() == "GKM":
+            self.setWindowTitle("Gori Ka Makaan")
 
     def pkdfunk(self,s):
         if s:
             self.appname = "PKD"
+        self._setWindowtitle()
 
     def gkmfunc(self,s):
         if s:
             self.appname = "GKM"
+        self._setWindowtitle()
 
     def typing(self):
         txt = self.txtbox.toPlainText()
@@ -199,15 +206,19 @@ class Newmainwin(QMainWindow):
             self.warnemptiness()
         else:
             # tweetthetext(self.tweettext)
-            ariri(self.tweettext,self.appname)
+            # ariri(self.tweettext,self.appname)
             self.notiflabel.setText("Tweet Sent from\n"+self.appname)
             self.notiflabel.setStyleSheet("background-color:rgb(128,195,66)")
             self.txtbox.clear()
             self.txtbox.setFocus()
+            # self.pkd.toggle()
+            self.gkm.toggle()
     
     def warnemptiness(self):
         self.notiflabel.setStyleSheet("background-color:Yellow")
         self.notiflabel.setText("No Text. No Tweet.")
+
+
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     twiwin = Newmainwin()
