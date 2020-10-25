@@ -1,7 +1,8 @@
 from PyQt5 import QtCore,QtGui,QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QLabel, QApplication, QPushButton, QWidget, \
-                            QVBoxLayout,QHBoxLayout,QGridLayout
+                            QVBoxLayout,QHBoxLayout,QGridLayout, QShortcut
 from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QKeySequence
 import sys
 from textotweet import tweetthetext,ariri
 
@@ -82,7 +83,8 @@ class Newmainwin(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        # self.setWindowTitle('Rab Raakha')
+        self.appname = "PKD"        # Default app (Paan Ki Dukaan)
+        self._setWindowtitle()
         self.resize(580,270)
 
         textfont = QtGui.QFont("Arial",14)
@@ -152,11 +154,26 @@ class Newmainwin(QMainWindow):
 
         lowerlayout.addWidget(self.notiflabel)
 
-        self._setWindowtitle()
-
         widget = QWidget()
         widget.setLayout(mainlayout)
         self.setCentralWidget(widget)
+
+        # ====== KEYBOARD SHORTCUTS ======
+
+        self.sexyshorts = QShortcut(QKeySequence("Ctrl+U"),self)
+        self.sexyshorts.activated.connect(self.sexyshout)
+
+        # self.topkd = QShortcut(QKeySequence("Ctrl+P",self))
+        # self.topkd.activated.connect(self.enpkd)
+
+        # self.topkd = QShortcut(QKeySequence("Ctrl+G",self))
+        # self.topkd.activated.connect(self.engkm)
+
+        self.topkd = QShortcut(QKeySequence("Ctrl+K"),self)
+        self.topkd.activated.connect(self.appflick)
+    
+    def sexyshout(self):
+        self.notiflabel.setText("Sexy Sex")
 
     def _setWindowtitle(self):
         if self.appname.upper() == "PKD":
@@ -198,6 +215,8 @@ class Newmainwin(QMainWindow):
         self.txtbox.setFocus()
         self.notiflabel.setText("Ready to Tweet")
         self.notiflabel.setStyleSheet("background-color:rgb(20,170,255)")
+        # self.gkm.toggle()
+        # self.pkd.toggle()
     
     def tweetit(self):
         self.tweettext = self.txtbox.toPlainText()
@@ -212,7 +231,14 @@ class Newmainwin(QMainWindow):
             self.txtbox.clear()
             self.txtbox.setFocus()
             # self.pkd.toggle()
+            # self.gkm.toggle()
+            self.appflick()
+    
+    def appflick(self):
+        if self.pkd.isChecked():
             self.gkm.toggle()
+        else:
+            self.pkd.toggle()
     
     def warnemptiness(self):
         self.notiflabel.setStyleSheet("background-color:Yellow")
