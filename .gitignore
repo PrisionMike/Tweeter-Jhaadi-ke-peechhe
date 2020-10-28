@@ -1,3 +1,4 @@
 .env
 qtlearn1.py
 *.cpython
+__pycache__
