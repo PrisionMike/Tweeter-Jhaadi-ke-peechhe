@@ -94,8 +94,8 @@ class Newmainwin(QMainWindow):
 
         self.shouldtweet = False        # No apparent use of this flag right now.
         self.tweettext = ""
-        self.charlim = 240
-        self.charwarn = 220
+        self.charlim = 280
+        self.charwarn = 260
 
         mainlayout = QVBoxLayout()
         lowerlayout = QHBoxLayout()
